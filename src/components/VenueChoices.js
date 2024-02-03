@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import * as React from "react";
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
 import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
 
 const images = [
   {
@@ -28,6 +33,11 @@ const images = [
   {
     url: "https://www.tastingtable.com/img/gallery/20-italian-dishes-you-need-to-try-at-least-once/intro-1702481237.jpg",
     title: "Italian",
+    width: "33.3%",
+  },
+  {
+    url: "https://images-cdn.welcomesoftware.com/Zz0zZmEwYTlmODJhZTIxMWVjODdjYWU2ZTYxNWJmMmRjNQ==/Zz0zMTc5YWIwZTBmZmYxMWVjOTBiZDJmOGY5N2ZjYjVhMA%3D%3D.jpg?width=1366",
+    title: "Thai",
     width: "33.3%",
   },
 ];
@@ -98,14 +108,57 @@ const ImageMarked = styled("span")(({ theme }) => ({
 
 export default function ButtonBaseDemo() {
   const [selectedButton, setSelectedButton] = useState(null);
+  const [textFieldValue, setTextFieldValue] = useState("");
+  const [isSent, setIsSent] = useState(false);
 
   const handleClick = (title) => {
     setSelectedButton(title);
   };
 
+  const handleConfirm = () => {
+    setIsSent(true);
+    const payload = {
+      body: selectedButton ? selectedButton : textFieldValue,
+    };
+
+    fetch(
+      "https://rg6t6otdnf.execute-api.ap-southeast-1.amazonaws.com/dev/foodChoice",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Response:", data);
+        // Handle response if needed
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        // Handle error if needed
+      });
+  };
+
+  const handleTextFieldChange = (event) => {
+    setTextFieldValue(event.target.value);
+  };
+
   return (
     <Box
-      sx={{ display: "flex", flexWrap: "wrap", minWidth: 300, width: "100%" }}
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        minWidth: 300,
+        width: "100%",
+      }}
     >
       {images.map((image) => (
         <ImageButton
@@ -141,7 +194,33 @@ export default function ButtonBaseDemo() {
           </Image>
         </ImageButton>
       ))}
-      <Typography variant="body1">Selected button: {selectedButton}</Typography>
+      <TextField
+        fullWidth
+        label="Others (Pls Specify thx)"
+        id="fullWidth"
+        sx={{ mt: 2 }}
+        value={textFieldValue}
+        onChange={handleTextFieldChange}
+      />
+
+      <Stack spacing={2} sx={{ mt: 2 }}>
+        <Typography variant="body1">
+          Selected button: {selectedButton}
+        </Typography>
+        <Typography variant="body1">
+          Text field value: {textFieldValue}
+        </Typography>
+        <Button
+          variant="contained"
+          color="success"
+          size="large"
+          endIcon={<SendIcon />}
+          onClick={handleConfirm}
+          disabled={isSent}
+        >
+          {isSent ? "Sent!" : "Confirm"}
+        </Button>
+      </Stack>
     </Box>
   );
 }
