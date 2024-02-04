@@ -10,7 +10,7 @@ function SurveyQuest() {
   survey.onComplete.add((sender, options) => {
     console.log(sender.data["Through which gate do you exit from work?"]);
     const payload = {
-      body: sender.data,
+      body: sender.data["Through which gate do you exit from work?"],
     };
     fetch(
       "https://rg6t6otdnf.execute-api.ap-southeast-1.amazonaws.com/dev/foodChoice",
