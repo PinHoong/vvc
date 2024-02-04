@@ -95,18 +95,16 @@
   }
   
   .line1 {
-    top: 15%;
+    top: 1%;
   }
   .line2 {
-    top: 30%;
+    top: 13%;
   }
   .line3 {
-    top: 50%;
-    text-align: center;
+    top: 33%;
   }
   .line4 {
     top: 65%;
-    text-align: center;
   }
   
   .open .flap {

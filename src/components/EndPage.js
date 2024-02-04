@@ -1,7 +1,5 @@
 import * as React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -19,8 +17,10 @@ import ResponsiveAppBar from "./navbar";
 import VenueChoices from "./VenueChoices";
 import SurveyComponent from "./MiscPref/SurveyComponent";
 import SurveyQuest from "./AddQuest/SurveyQuest";
+import ket from "./ket.gif";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
-const VenueSelect = () => {
+const EndPage = () => {
   const [surveyCompleted, setSurveyCompleted] = useState(false);
 
   const handleSurveyComplete = () => {
@@ -30,6 +30,7 @@ const VenueSelect = () => {
   return (
     <div>
       <ResponsiveAppBar />
+      <img src={ket} alt="loading..." />
       <Typography
         variant="h6"
         noWrap
@@ -46,48 +47,10 @@ const VenueSelect = () => {
           mb: 2,
         }}
       >
-        1. Food Selection
+        See you on the 14th mah cutie bb <FavoriteIcon sx={{ ml: 2 }} />
       </Typography>
-      <VenueChoices />
-      <Typography
-        variant="h6"
-        noWrap
-        component="a"
-        href="#app-bar-with-responsive-menu"
-        sx={{
-          mr: 2,
-          display: { xs: "none", md: "flex" },
-          fontFamily: '"Segoe UI"',
-          fontWeight: 700,
-          color: "black",
-          textDecoration: "none",
-          mt: 6,
-          mb: 2,
-        }}
-      >
-        2. Miscellaneous Questions
-      </Typography>
-      <SurveyComponent
-        sx={{ marginLeft: 0 }}
-        onComplete={handleSurveyComplete}
-      />
-      <SurveyQuest></SurveyQuest>
-      <Link to="/yayyiluvyou">
-        <Button
-          style={{
-            transition: "opacity 1s ease-in-out",
-            width: "100vw",
-          }}
-          sx={{ mt: 5 }}
-          size="large"
-          color="success"
-          variant="contained"
-        >
-          Proceed
-        </Button>
-      </Link>
     </div>
   );
 };
 
-export default VenueSelect;
+export default EndPage;

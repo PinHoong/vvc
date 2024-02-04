@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./envelope.css"; // Import the styles
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
@@ -15,7 +16,10 @@ const Envelope = () => {
   const handleOpenClick = () => {
     open();
   };
-
+  const handleOpenClick2 = () => {
+    // eslint-disable-next-line no-restricted-globals
+    history.push("/about");
+  };
   const open = () => {
     setIsOpen(true);
     setIsButtonVisible(false);
@@ -35,10 +39,11 @@ const Envelope = () => {
       <div className="front flap"></div>
       <div className="front pocket"></div>
       <div className="letter">
-        <p className="words line1"></p>
-        <p className="words line2"></p>
-        <p className="words line3"></p>
-        <p className="words line4"></p>
+        <p className="words line1">Dear Rachel,</p>
+        <p className="words line2">
+          You hv been the &lt;3 of my life these past months
+        </p>
+        <p className="words line3">and u make me a v happy boi.</p>
       </div>
       <div className="hearts">
         <div className="heart a1"></div>
@@ -73,22 +78,24 @@ const Envelope = () => {
             Will you be my Valentine?
           </Typography>
         </Grid>
-          <Grid item xs={6}>
+        <Grid item xs={6}>
+          <Link to="/about">
             <Button
-              onClick={handleOpenClick}
               style={{
                 opacity: isButtonVisible ? 0 : 1,
                 transition: "opacity 1s ease-in-out",
               }}
-              sx={{ml:3}}
+              sx={{ ml: 3 }}
               size="large"
               color="error"
               variant="contained"
             >
               Yes
             </Button>
-          </Grid>
-          <Grid item xs={6}>
+          </Link>
+        </Grid>
+        <Grid item xs={6}>
+          <Link to="/rejection">
             <Button
               onClick={handleOpenClick}
               style={{
@@ -101,7 +108,8 @@ const Envelope = () => {
             >
               No
             </Button>
-          </Grid>
+          </Link>
+        </Grid>
       </Grid>
     </div>
   );

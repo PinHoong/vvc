@@ -1,4 +1,5 @@
 export const json = {
+  completedHtml: "<h3>Thank you :)</h3>",
   elements: [
     {
       type: "ranking",

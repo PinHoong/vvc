@@ -8,6 +8,7 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
+import Grid from "@mui/material/Grid";
 
 const images = [
   {
@@ -151,6 +152,12 @@ export default function ButtonBaseDemo() {
     setTextFieldValue(event.target.value);
   };
 
+  const handleRefreshChoices = () => {
+    setSelectedButton(null);
+    setTextFieldValue("");
+    setIsSent(false);
+  };
+
   return (
     <Box
       sx={{
@@ -204,22 +211,61 @@ export default function ButtonBaseDemo() {
       />
 
       <Stack spacing={2} sx={{ mt: 2 }}>
-        <Typography variant="body1">
-          Selected button: {selectedButton}
-        </Typography>
-        <Typography variant="body1">
-          Text field value: {textFieldValue}
-        </Typography>
-        <Button
-          variant="contained"
-          color="success"
-          size="large"
-          endIcon={<SendIcon />}
-          onClick={handleConfirm}
-          disabled={isSent}
+        <Typography
+          variant="h6"
+          noWrap
+          component="a"
+          href="#app-bar-with-responsive-menu"
+          sx={{
+            mr: 2,
+            display: { xs: "none", md: "flex" },
+            fontFamily: '"Segoe UI"',
+            fontWeight: 600,
+            color: "black",
+            textDecoration: "none",
+            mt: 2,
+            mb: 2,
+          }}
         >
-          {isSent ? "Sent!" : "Confirm"}
-        </Button>
+          Selected Choice: {selectedButton}
+        </Typography>
+        <Typography
+          variant="h6"
+          noWrap
+          component="a"
+          href="#app-bar-with-responsive-menu"
+          sx={{
+            mr: 2,
+            display: { xs: "none", md: "flex" },
+            fontFamily: '"Segoe UI"',
+            fontWeight: 600,
+            color: "black",
+            textDecoration: "none",
+            mt: 2,
+            mb: 2,
+          }}
+        >
+          Other Choice: {textFieldValue}
+        </Typography>
+        <Grid container spacing={2}>
+          <Button
+            variant="contained"
+            color="success"
+            size="large"
+            endIcon={<SendIcon />}
+            onClick={handleConfirm}
+            disabled={isSent || (!selectedButton && !textFieldValue)}
+          >
+            {isSent ? "Sent!" : "Confirm"}
+          </Button>
+          <Button
+            sx={{ ml: 2 }}
+            variant="contained"
+            onClick={handleRefreshChoices}
+          >
+            Refresh Choices
+          </Button>
+        </Grid>
       </Stack>
     </Box>
   );
