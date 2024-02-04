@@ -30,9 +30,7 @@ function SurveyComponent({ onComplete }) {
         console.log("Response:", data);
         // Handle response if needed
       })
-      .then(() => {
-        onComplete(); // Call the onComplete callback provided by the parent component
-      })
+
       .catch((error) => {
         console.error("Error:", error);
         // Handle error if needed

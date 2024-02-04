@@ -19,6 +19,7 @@ import ResponsiveAppBar from "./navbar";
 import VenueChoices from "./VenueChoices";
 import SurveyComponent from "./MiscPref/SurveyComponent";
 import SurveyQuest from "./AddQuest/SurveyQuest";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 
 const VenueSelect = () => {
   const [surveyCompleted, setSurveyCompleted] = useState(false);
@@ -77,13 +78,14 @@ const VenueSelect = () => {
           style={{
             transition: "opacity 1s ease-in-out",
             width: "100vw",
+            height: "3vw",
           }}
           sx={{ mt: 5 }}
           size="large"
           color="success"
           variant="contained"
         >
-          Proceed
+          Proceed <KeyboardDoubleArrowRightIcon />
         </Button>
       </Link>
     </div>
